@@ -77,6 +77,8 @@ export default {
           if (userInfo[userName] !== undefined) {
             if (userInfo[userName] === password) {
               alert('登录成功')
+              let user = { userName: userName, password: password }
+              localStorage.user = JSON.stringify(user)
               this.$router.push('home')
             } else {
               alert('密码错误')

@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import { router } from './router'
-import { antd } from './antd'
+import { antd } from './common/antd'
 
 antd()
 

@@ -60,6 +60,9 @@
 </template>
 
 <script>
+import { encode } from '@/common/crypto/hash.js'
+import { userInfo } from '@/common/static/userInfo.js'
+
 export default {
   beforeCreate () {
     this.form = this.$form.createForm(this)
@@ -69,7 +72,18 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          let userName = values.userName
+          let password = encode('sha1', values.password)
+          if (userInfo[userName] !== undefined) {
+            if (userInfo[userName] === password) {
+              alert('登录成功')
+              this.$router.push('home')
+            } else {
+              alert('密码错误')
+            }
+          } else {
+            alert('用户不存在')
+          }
         }
       })
     }
